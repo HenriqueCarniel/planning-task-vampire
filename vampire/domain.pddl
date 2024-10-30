@@ -19,7 +19,7 @@
             (not (fighting))
         )
         :effect (and
-            ;; Alterna a luz na sala ?room
+            ;; Alterna a luz na sala
             (when (light-on ?room) (not (light-on ?room)))
             (when (not (light-on ?room)) (light-on ?room))
 
@@ -31,25 +31,25 @@
                     (when (not (light-on ?anti-clockwise-neighbor))
                         (and
                             (vampire-is-in ?anti-clockwise-neighbor)
-                            ;; Verifica se o caçador também está lá
+                            ;; Verifica se a caçadora também está lá
                             (when (slayer-is-in ?anti-clockwise-neighbor) (fighting))
                         ))
-                    ;; Vampiro move-se para a direita caso ambas as salas estejam iluminadas
+                    ;; Vampiro move-se para a direita caso ambas as salas estejam iluminadas ou caso só a sala direita estiver escura
                     (when (or (and (light-on ?anti-clockwise-neighbor) (light-on ?clockwise-neighbor))
                             (and (light-on ?anti-clockwise-neighbor) (not (light-on ?clockwise-neighbor))))
                         (and
                             (vampire-is-in ?clockwise-neighbor)
-                            ;; Verifica se o caçador também está lá
+                            ;; Verifica se a caçadora também está lá
                             (when (slayer-is-in ?clockwise-neighbor) (fighting))
                         ))
                 )
             )
 
-            ;; Movimentos da caçador
+            ;; Movimentos da caçadora
             (when (and (slayer-is-in ?room) (light-on ?room))
                 (and
                     (not (slayer-is-in ?room))
-                    ;; Caçador move-se para a direita se estiver iluminado
+                    ;; Caçadora move-se para a direita se estiver iluminado
                     (when (light-on ?clockwise-neighbor)
                         (and
                             (slayer-is-in ?clockwise-neighbor)
@@ -78,7 +78,7 @@
             (fighting)
         )
         :effect (and
-            ;; Caçador morre se a sala é escura e não contém alho
+            ;; Caçadora morre se a sala é escura e não contém alho
             (when (and (not (light-on ?room)) (not (CONTAINS-GARLIC ?room)))
                 (and (not (slayer-is-alive)) (not (fighting)) (not (slayer-is-in ?room))))
 
